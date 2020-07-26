@@ -1,0 +1,37 @@
+---
+name: Button
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+import { Alert } from 'react-native';
+import Button from './Button.component';
+
+# Button
+
+Basic button used within the project
+
+## Properties
+
+<Props of={Button} />
+
+## Basic usage
+
+<Playground>
+  <Button kind="primary" title="Basic Usage" />
+</Playground>
+
+## Using different kinds
+
+<Playground>
+  <Button
+    kind="primary"
+    title="Primary Button"
+    onClick={() => alert('Primary Clicked')}
+  />
+  <Button
+    kind="secondary"
+    title="Secondary Button"
+    onClick={() => alert('Primary Clicked')}
+  />
+</Playground>

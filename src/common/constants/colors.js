@@ -1,0 +1,28 @@
+// Global colors
+export const COLOR_PRIMARY = '#245FA4';
+export const COLOR_SECONDARY = '#5BCDFB';
+export const COLOR_WHITE = '#FFFFFF';
+export const COLOR_BLACK = '#000000';
+export const COLOR_GREY = '#707172';
+export const COLOR_GREY2 = '#393B3C';
+export const COLOR_GREY3 = '#D8D8D8';
+export const COLOR_DISABLED = '#B2B2B2';
+export const COLOR_STATUS_RED = '#D53082';
+export const COLOR_STATUS_YELLOW = '#F4C34C';
+export const COLOR_STATUS_GREEN = '#66C272';
+export const COLOR_STATUS_BLUE = '#5086F4';
+
+export default {
+  COLOR_PRIMARY,
+  COLOR_SECONDARY,
+  COLOR_WHITE,
+  COLOR_BLACK,
+  COLOR_GREY,
+  COLOR_DISABLED,
+  COLOR_GREY2,
+  COLOR_GREY3,
+  COLOR_STATUS_RED,
+  COLOR_STATUS_YELLOW,
+  COLOR_STATUS_GREEN,
+  COLOR_STATUS_BLUE,
+};

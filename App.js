@@ -1,113 +1,137 @@
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import routes from './src/navigation/routes';
+import './src/navigation/routes.types';
+import { Text, StyleSheet, View, StatusBar } from 'react-native';
+import {
+  COLOR_GREY2,
+  COLOR_PRIMARY,
+  COLOR_GREY,
+  COLOR_GREY3,
+} from './src/common/constants/colors';
+import { scale, height, normalizeFont } from './src/common/constants/style';
+import Feather from 'react-native-vector-icons/Feather';
+import { useEffect } from 'react';
+import { useState } from 'react';
+
+
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
+ * Maps routes from the `routes.js` file to `Stack.Screen` routes.
+ * @param {RouteObject[]} _routes - Routes to map to `Stack.Screen` components.
  */
-
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
+const mapRoutes = (_routes, Navigator) =>
+  _routes.map((route) => {
+    // SplashScreen.hide();
+    const { component, title, subTitle, screen, showBackButton, tabs } = route;
+    let Component = component;
+    if (tabs) {
+      const Tab = createBottomTabNavigator();
+      Component = () => (
+        <Tab.Navigator
+          screenOptions={({ route: { name } }) => ({
+            tabBarIcon: ({ color, size }) => {
+              const activeTab = tabs.find((tab) => tab.screen === name);
+              if (activeTab) {
+                const { iconFamily, iconName } = activeTab;
+                if (iconFamily === 'Feather') {
+                  return <Feather name={iconName} size={size} color={color} />;
+                }
+                if (iconFamily === 'LightningBoltSmallGrey') {
+                  return <LightningBoltSmallGrey color={color} />;
+                }
+              }
+              return null;
+            },
+          })}
+          tabBarOptions={{
+            labelStyle:{alignItems:'center', justifyContent: 'center', marginBottom:scale(10),},
+            style:{paddingTop:10,height:scale(55),alignItems:'center',justifyContent:'center', borderTopWidth:1,borderTopColor:COLOR_GREY3},
+            activeTintColor: COLOR_PRIMARY,
+            inactiveTintColor: COLOR_GREY,
+          }}>
+          {mapRoutes(tabs, Tab)}
+        </Tab.Navigator>
+      );
+    }
+    const displayHeader = () => (
+      <View style={{ flexDirection: 'row' }}>
+        <View style={styles.headerViewStyle}>
+          <View style={{ top: scale(-18) }}>
+            <Text style={styles.headerTitle}>{title}</Text>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.subHeaderTitle}>
+              {/* \n is to make all Headers render on the same place even if there is no subTitle */}
+              {subTitle ? subTitle : '\n'}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+
+    return (
+      <Navigator.Screen
+        name={screen}
+        component={Component}
+        options={{
+          headerLeft: showBackButton,
+          headerBackTitleVisible: false,
+          headerTitle: displayHeader,
+          headerLeftContainerStyle: {
+            height: scale(70),
+            paddingLeft: scale(10),
+          },
+          headerTitleStyle: styles.headerTitle,
+          headerStyle: [
+            styles.headerViewStyle,
+            { height: title ? scale(104) : 0 },
+          ],
+          headerTitleAlign: 'center',
+        }}
+      />
+    );
+  });
+
+const Stack = createStackNavigator();
+
+/**
+ * Entry component into the app;
+ */
+const App = () => {
+  return(
+    <>
+      <StatusBar hidden={false} backgroundColor="#404041" />
+        <NavigationContainer>
+          <Stack.Navigator>{mapRoutes(routes, Stack)}</Stack.Navigator>
+        </NavigationContainer>
     </>
-  );
+    )
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  headerViewStyle: {
+    alignItems: 'center',
+    shadowColor: 'transparent',
+    height: '100%',
+    elevation: 0,
+    shadowRadius: 0,
+    shadowOffset: {
+      height: scale(0),
+    },
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  headerTitle: {
+    top: 0,
+    fontSize: normalizeFont(15.6),
+    color: COLOR_GREY2,
   },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  subHeaderTitle: {
+    maxWidth: scale(310),
+    textAlign: 'center',
+    fontSize: normalizeFont(10.5),
+    color: COLOR_PRIMARY,
   },
 });
 
