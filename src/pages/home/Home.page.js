@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { ImageBackground, View, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import styles from "./Home.style";
+import { useNavigation } from "@react-navigation/native";
+
 
 const Home = () => {
+  
   const [state, setState] = useState({
     example: "",
   });
   const { example } = state;
 
-  const nav = useNavigation();
+  const nav = useNavigation()
 
   return (
     <View style={styles.mainContainer}>
@@ -18,30 +20,15 @@ const Home = () => {
       </View>
       <View style={styles.weaponView}>
         <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("UserWeaponPage", {
-              userWeaponChoice: "ROCK",
-            });
-          }}
-        >
+          onPress={() => nav.navigate('GameOn', { userWeaponChoice: "ROCK" })}>
           <Text style={styles.navigateText}>ROCK</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("UserWeaponPage", {
-              userWeaponChoice: "PAPER",
-            });
-          }}
-        >
+          onPress={() => nav.navigate('GameOn', { userWeaponChoice: "PAPER" })}>
           <Text style={styles.navigateText}>PAPER</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("UserWeaponPage", {
-              userWeaponChoice: "SCISSORS",
-            });
-          }}
-        >
+          onPress={() => nav.navigate('GameOn', { userWeaponChoice: "SCISSORS" })}>
           <Text style={styles.navigateText}>SCISSORS</Text>
         </TouchableOpacity>
       </View>

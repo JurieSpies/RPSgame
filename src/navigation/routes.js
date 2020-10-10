@@ -1,5 +1,5 @@
 import Home from '../pages/home/Home.page';
-import Settings from '../pages/settingsPage/Settings.page';
+import GameOn from '../pages/gameOn/GameOn.page';
 import './routes.types';
 
 /**
@@ -9,37 +9,17 @@ import './routes.types';
 
 // TO DISABLE BACK BUTTON ON TITLE FOR A PAGE USE showBackButton: false,
 const routes = [
-  //PAGE WITH TABS EXAMPLE
   {
     screen: 'Home',
-    showBackButton: false,
-    tabs: [
-      {
-        screen: 'Home',
-        component: Home,
-        iconFamily: 'Feather',
-        iconName: 'home',
-      },
-      {
-        screen: 'Settings',
-        component: Settings,
-        showBackButton: false,
-        iconFamily: 'Feather',
-        iconName: 'map',
-      },
-    ],
+    component: Home,
+    // title: 'Home',
+    // subTitle: 'Home',
   },
-  // {
-  //   screen: 'Home',
-  //   component: Home,
-  //   title: 'Home',
-  //   subTitle: 'Home',
-  // },
   {
-    screen: 'Settings',
-    component: Settings,
-    title: 'User Selection',
-    subTitle: 'User Selection title',
+    screen: 'GameOn',
+    component: GameOn,
+    title: 'Game On!',
+    // subTitle: 'User Selection ',
   },
 ];
 
