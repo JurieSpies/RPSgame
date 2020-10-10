@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { ImageBackground, View,Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import styles from './Home.style';
+import React, { useState } from "react";
+import { ImageBackground, View, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import styles from "./Home.style";
 
 const Home = () => {
   const [state, setState] = useState({
-    example: '',
+    example: "",
   });
   const { example } = state;
 
@@ -13,12 +13,38 @@ const Home = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <ImageBackground style={styles.backgroundImage}>
-      <Text  style={{fontSize:20}}>My Home Page</Text>
-      <TouchableOpacity onPress={() => nav.navigate('Settings')}>
-        <Text>Go to Settings page</Text>
-      </TouchableOpacity>
-      </ImageBackground>
+      <View>
+        <Text style={styles.welcomeText}>MAKE A CHOICE</Text>
+      </View>
+      <View style={styles.weaponView}>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate("UserWeaponPage", {
+              userWeaponChoice: "ROCK",
+            });
+          }}
+        >
+          <Text style={styles.navigateText}>ROCK</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate("UserWeaponPage", {
+              userWeaponChoice: "PAPER",
+            });
+          }}
+        >
+          <Text style={styles.navigateText}>PAPER</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate("UserWeaponPage", {
+              userWeaponChoice: "SCISSORS",
+            });
+          }}
+        >
+          <Text style={styles.navigateText}>SCISSORS</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

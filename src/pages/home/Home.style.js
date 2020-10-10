@@ -1,15 +1,25 @@
 import { StyleSheet } from 'react-native';
-import { COLOR_WHITE } from '../../common/constants/colors';
-import { scale } from '../../common/constants/style';
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: COLOR_WHITE,
+  mainContainer:{
+    height: '100%',
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  backgroundImage: {
-    flex: 1,
-    marginHorizontal: scale(30),
+  welcomeText: {
+    fontSize: 24,
+    color: 'grey',
   },
+  navigateText: {
+    margin: 15,
+    fontSize: 18,
+
+  },
+  weaponView: {
+    flexDirection: 'column',
+    marginTop: 20,
+  },
+
 });
 export default styles;
