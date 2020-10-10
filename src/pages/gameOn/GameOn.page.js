@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { ImageBackground, View,Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import styles from './Settings.style';
+import styles from './GameOn.style';
 
-const UserSelection = () => {
+
+const GameOn = ({route}) => {
+  
+  const nav = useNavigation();
+
+  const { userWeaponChoice } = route.params;
+  
   const [state, setState] = useState({
     example: '',
   });
   const { example } = state;
 
-  const nav = useNavigation();
+  
 
   return (
     <View style={styles.mainContainer}>
@@ -23,4 +29,4 @@ const UserSelection = () => {
   );
 };
 
-export default UserSelection;
+export default GameOn;
