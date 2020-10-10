@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.boilerplate_rn_app_with_react_navigation5"
+        applicationId "com.rpsgame"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,4 +1,4 @@
-package com.boilerplate_rn_app_with_react_navigation5;
+package com.rpsgame;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "boilerplate_rn_app_with_react_navigation5";
+    return "RPSgame";
   }
 }
